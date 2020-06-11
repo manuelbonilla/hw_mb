@@ -8,6 +8,7 @@
 #include <ros/node_handle.h>
 #include <sensor_msgs/JointState.h>
 #include <std_msgs/Bool.h>
+#include <std_msgs/Float64.h>
 #include <kdl_conversions/kdl_msg.h>
 #include <visualization_msgs/Marker.h>
 #include <geometry_msgs/Point.h>
@@ -76,7 +77,7 @@ private:
 
   ros::Subscriber sub_move_to_joint_ref_, sub_sphere, sub_move_to_cart_ref;
   ros::Publisher pub_cart_pose_, pub_cart_dist_sphere;
-  ros::Publisher pub_traj_sucess_, pub_joint_states_;
+  ros::Publisher pub_traj_sucess_, pub_joint_states_, pub_cart_ball_pose_in_tcp;
   
 
 protected:

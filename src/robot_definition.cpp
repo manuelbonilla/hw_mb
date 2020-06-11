@@ -172,8 +172,9 @@ bool UR10::init(ros::NodeHandle &n){
 	sub_sphere = nh_.subscribe("/visualization_marker", 250, &UR10::spherePoseCb, this);
 	pub_cart_pose_ = nh_.advertise<geometry_msgs::Pose>("/robot_cart_pose", 250);;
 	pub_traj_sucess_ = nh_.advertise<std_msgs::Bool>("/movement_completed", 250);
-	pub_cart_dist_sphere = nh_.advertise<geometry_msgs::Vector3>("/sphere_dist", 250);
+	pub_cart_dist_sphere = nh_.advertise<std_msgs::Float64>("/sphere_dist", 250);
 	pub_joint_states_ = nh_.advertise<sensor_msgs::JointState>("/joint_states", 250);
+	pub_cart_ball_pose_in_tcp = nh_.advertise<geometry_msgs::Pose>("/sphere_pose_in_tcp", 250);
 
 	geometry_msgs::Pose cart_pose;
 	tf::poseKDLToMsg(x_curr_, cart_pose);
@@ -286,14 +287,21 @@ void UR10::spherePoseCb(const visualization_msgs::Marker::ConstPtr &msg )
 	KDL::Vector p_marker(msg->pose.position.x,msg->pose.position.y,msg->pose.position.z);
 
 	KDL::Twist x_err;
-	KDL::Frame x_sphere(p_marker);
+	KDL::Frame x_sphere(p_marker); // pose of the ball in world frame
+	//x_curr is  the pose of the TCP in world frame
 	x_err.vel = x_sphere.p - x_curr_.p;
-	geometry_msgs::Vector3 sphere_dist;
-	sphere_dist.x = x_err.vel(0) ;
-	sphere_dist.y = x_err.vel(1);
-	sphere_dist.z = x_err.vel(2);
+	//geometry_msgs::Vector3 sphere_dist;
+	std_msgs::Float64 dist;
+	dist.data = sqrt(x_err.vel(0) *x_err.vel(0) +x_err.vel(1) *x_err.vel(1) +x_err.vel(2) *x_err.vel(2) ) ;
+	//sphere_dist.x = x_err.vel(0) ;
+	//sphere_dist.y = x_err.vel(1);
+	//sphere_dist.z = x_err.vel(2);
 
-	pub_cart_dist_sphere.publish(sphere_dist);
+	KDL::Frame sphere_pose_in_tcp(x_curr_.Inverse()*x_sphere); //sphere pose with respect to  robot Tcp
+	pub_cart_dist_sphere.publish(dist);
+	geometry_msgs::Pose sphere_pose_in_tcp_msg;
+	tf::poseKDLToMsg(sphere_pose_in_tcp, sphere_pose_in_tcp_msg);
+	pub_cart_ball_pose_in_tcp.publish(sphere_pose_in_tcp_msg);
 
 };
 
