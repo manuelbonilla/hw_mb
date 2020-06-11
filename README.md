@@ -42,3 +42,8 @@ Part 3 can be tested publishing the cartesian reference
 This parameter speed up the resolved motion generation
 `rosparam set /alpha_cart_to_joint_projection`
 
+
+---------------------------------------------
+
+This code was tested on Ubuntu 18.04 and ros melodic
+
