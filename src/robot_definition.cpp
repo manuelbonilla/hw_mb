@@ -303,6 +303,12 @@ void UR10::spherePoseCb(const visualization_msgs::Marker::ConstPtr &msg )
 	tf::poseKDLToMsg(sphere_pose_in_tcp, sphere_pose_in_tcp_msg);
 	pub_cart_ball_pose_in_tcp.publish(sphere_pose_in_tcp_msg);
 
+	static tf::TransformBroadcaster br;
+	tf::Transform transform;
+	transform.setOrigin( tf::Vector3(sphere_pose_in_tcp_msg.position.x, sphere_pose_in_tcp_msg.position.y, sphere_pose_in_tcp_msg.position.z) );
+	transform.setRotation( tf::Quaternion(0, 0, 0) );
+	br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "ee_link", "sphere_center"));
+
 };
 
 void UR10::moveToCartRef(const geometry_msgs::Point::ConstPtr &msg )
