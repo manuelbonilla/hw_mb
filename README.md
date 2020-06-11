@@ -45,5 +45,5 @@ This parameter speed up the resolved motion generation
 
 ---------------------------------------------
 
-This code was tested on Ubuntu 18.04 and ros melodic
+This code was tested on Ubuntu 18.04 and ros melodic. The parameters in the URDF can be changed to use it fro all Universal robots.
 
