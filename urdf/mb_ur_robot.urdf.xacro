@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<robot name="mbur_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+	<xacro:property name="d1" default="0.118"/>
+	<xacro:property name="a2" default="-0.6127"/>
+	<xacro:property name="a3" default="-0.5716"/>
+	<xacro:property name="d4" default="0.1639"/>
+	<xacro:property name="d5" default="0.1157"/>
+	<xacro:property name="d6" default="0.0922"/>
+
+	<link name="world"/>
+
+  <joint name="fixed" type="fixed">
+    <parent link="world"/>
+    <child link="base_link"/>
+  </joint>
+
+	<link name="base_link">
+	</link>
+	<link name="link0_x_axis">
+	</link>
+	<joint name="q0_x" type="fixed">
+		<origin xyz="0 0 0" rpy="0 ${pi/2}  0"/>
+		<parent link="base_link"/>
+		<child link="link0_x_axis"/>
+	</joint>
+	<link name="link1"/>
+	<link name="link1_x_axis">
+	</link>
+	<joint name="q1" type="revolute">
+		<origin xyz="0 0 ${d1}" rpy="0 0 0"/>
+		<parent link="base_link"/>
+		<child link="link1"/>
+		<axis xyz="0 0 1"/>
+		<limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="330.0" velocity="2.16"/>
+	</joint>
+	<joint name="q1_passive" type="fixed">
+		<origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+		<parent link="link1"/>
+		<child link="link1_passive"/>
+	</joint>
+	<link name="link1_passive">
+	</link>
+	<joint name="q1_x" type="fixed">
+		<origin xyz="0 0 0" rpy="0 ${pi/2}  0"/>
+		<parent link="link1_passive"/>
+		<child link="link1_x_axis"/>
+	</joint>
+	<link name="link2"/>
+	<link name="link2_x_axis">
+	</link>
+	<joint name="q2" type="revolute">
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<parent link="link1_passive"/>
+		<child link="link2"/>
+		<axis xyz="0 0 1"/>
+		<limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="330.0" velocity="2.16"/>
+	</joint>
+	<joint name="q2_passive" type="fixed">
+		<origin xyz="${a2} 0 0" rpy="0 0 0"/>
+		<parent link="link2"/>
+		<child link="link2_passive"/>
+	</joint>
+	<link name="link2_passive">
+	</link>
+	<joint name="q2_x" type="fixed">
+		<origin xyz="0 0 0" rpy="0 ${pi/2}  0"/>
+		<parent link="link2_passive"/>
+		<child link="link2_x_axis"/>
+	</joint>
+	<link name="link3"/>
+	<link name="link3_x_axis">
+	</link>
+	<joint name="q3" type="revolute">
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<parent link="link2_passive"/>
+		<child link="link3"/>
+		<axis xyz="0 0 1"/>
+		<limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="330.0" velocity="2.16"/>
+	</joint>
+	<joint name="q3_passive" type="fixed">
+		<origin xyz="${a3} 0 0" rpy="0 0 0"/>
+		<parent link="link3"/>
+		<child link="link3_passive"/>
+	</joint>
+	<link name="link3_passive">
+	</link>
+	<joint name="q3_x" type="fixed">
+		<origin xyz="0 0 0" rpy="0 ${pi/2}  0"/>
+		<parent link="link3_passive"/>
+		<child link="link3_x_axis"/>
+		<limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="330.0" velocity="2.16"/>
+	</joint>
+	<link name="link4"/>
+	<link name="link4_x_axis">
+	</link>
+	<joint name="q4" type="revolute">
+		<origin xyz="0 0 ${d4}" rpy="0 0 0"/>
+		<parent link="link3_passive"/>
+		<child link="link4"/>
+		<axis xyz="0 0 1"/>
+		<limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="330.0" velocity="2.16"/>
+	</joint>
+	<joint name="q4_passive" type="fixed">
+		<origin xyz="0 0 0" rpy="${pi/2}  0 0"/>
+		<parent link="link4"/>
+		<child link="link4_passive"/>
+	</joint>
+	<link name="link4_passive">
+	</link>
+	<joint name="q4_x" type="fixed">
+		<origin xyz="0 0 0" rpy="0 ${pi/2}  0"/>
+		<parent link="link4_passive"/>
+		<child link="link4_x_axis"/>
+	</joint>
+	<link name="link5"/>
+	<link name="link5_x_axis">
+	</link>
+	<joint name="q5" type="revolute">
+		<origin xyz="0 0 ${d5}" rpy="0 0 0"/>
+		<parent link="link4_passive"/>
+		<child link="link5"/>
+		<axis xyz="0 0 1"/>
+		<limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="330.0" velocity="2.16"/>
+	</joint>
+	<joint name="q5_passive" type="fixed">
+		<origin xyz="0 0 0" rpy="${-1*pi/2} 0 0"/>
+		<parent link="link5"/>
+		<child link="link5_passive"/>
+	</joint>
+	<link name="link5_passive">
+	</link>
+	<joint name="q5_x" type="fixed">
+		<origin xyz="0 0 0" rpy="0 ${pi/2}  0"/>
+		<parent link="link5_passive"/>
+		<child link="link5_x_axis"/>
+	</joint>
+	<link name="link6"/>
+	<link name="link6_x_axis">
+	</link>
+	<joint name="q6" type="revolute">
+		<origin xyz="0 0 ${d6}" rpy="0 0 0"/>
+		<parent link="link5_passive"/>
+		<child link="link6"/>
+		<axis xyz="0 0 1"/>
+		<limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="330.0" velocity="2.16"/>
+	</joint>
+	<joint name="q6_passive" type="fixed">
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<parent link="link6"/>
+		<child link="ee_link"/>
+	</joint>
+	<link name="ee_link">
+	</link>
+	<joint name="q6_x" type="fixed">
+		<origin xyz="0 0 0" rpy="0 ${pi/2}  0"/>
+		<parent link="ee_link"/>
+		<child link="link6_x_axis"/>
+	</joint>
+</robot>

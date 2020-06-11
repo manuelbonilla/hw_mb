@@ -1,0 +1,21 @@
+<launch>
+
+  <param name="robot_description" command="$(find xacro)/xacro $(find hw_mb)/urdf/mb_ur_robot.urdf.xacro" />
+
+
+  <!--node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" >
+    <param name="use_gui" value="true"/>
+  </node-->
+
+  <rosparam file="$(find hw_mb)/config/robot_config.yaml" command="load" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  <node name="hw_mb" pkg="hw_mb" type="hw_mb" />
+
+  <rosparam file="$(find hw_mb)/config/ball_cfg.yaml" command="load" />
+  <node name="hw_mb_ball" pkg="hw_mb" type="ball" />
+
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find hw_mb)/launch/rviz.rviz" required="true"  />
+
+
+</launch>

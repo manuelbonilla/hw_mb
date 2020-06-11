@@ -1,0 +1,42 @@
+#robot configuration
+root_name : base_link
+tip_name : ee_link
+#in rad
+q1:
+  pos_max: 6.283185
+  pos_min: -6.283185
+  vel_max: 2.094395
+  acc_max: 5.235988
+  init_pos: 0
+q2:
+  pos_max: 6.283185
+  pos_min: -6.283185
+  vel_max: 2.094395
+  acc_max: 5.235988
+  init_pos: -1.4
+q3:
+  pos_max: 6.283185
+  pos_min: -6.283185
+  vel_max: 3.141593
+  acc_max: 5.235988
+  init_pos: 1.4
+q4:
+  pos_max: 6.283185
+  pos_min: -6.283185
+  vel_max: 3.141593
+  acc_max: 5.235988
+  init_pos: .5
+q5:
+  pos_max: 6.283185
+  pos_min: -6.283185
+  vel_max: 3.141593
+  acc_max: 5.235988
+  init_pos: -.3
+q6:
+  pos_max: 6.283185
+  pos_min: -6.283185
+  vel_max: 3.141593
+  acc_max: 5.235988
+  init_pos: 0
+#this erros is for joint and cartesian space
+error_tolerance: 0.1
