@@ -169,6 +169,17 @@ target_link_libraries(ball
   ${catkin_LIBRARIES}
 )
 
+
+add_executable(test_hw 
+  src/test.cpp)
+
+#add_dependencies(ball ball_EXPORTED_TARGETS ${catkin_EXPORTED_TARGETS})
+
+target_link_libraries(test_hw
+  ${catkin_LIBRARIES}
+)
+
+
 #############
 ## Install ##
 #############

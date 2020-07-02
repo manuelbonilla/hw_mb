@@ -171,7 +171,7 @@ bool UR10::init(ros::NodeHandle &n){
 
 	sub_sphere = nh_.subscribe("/visualization_marker", 250, &UR10::spherePoseCb, this);
 	pub_cart_pose_ = nh_.advertise<geometry_msgs::Pose>("/robot_cart_pose", 250);;
-	pub_traj_sucess_ = nh_.advertise<std_msgs::Bool>("/movement_completed", 250);
+	pub_traj_sucess_ = nh_.advertise<std_msgs::Bool>("/movement_completed>", 250);
 	pub_cart_dist_sphere = nh_.advertise<std_msgs::Float64>("/sphere_dist", 250);
 	pub_joint_states_ = nh_.advertise<sensor_msgs::JointState>("/joint_states", 250);
 	pub_cart_ball_pose_in_tcp = nh_.advertise<geometry_msgs::Pose>("/sphere_pose_in_tcp", 250);
